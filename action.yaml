@@ -1,0 +1,29 @@
+name: 'Argo Gke Deploy'
+description: 'Update version in a ApplicationSet in argo'
+
+inputs:
+  yaml_path:
+    description: 'Path to file to patch'
+    required: true
+    default: 'nopath'
+  version_path:
+    description: 'In the file, path to version section'
+    required: true
+    default: ''
+  version:
+    description: 'version'
+    required: true
+    default: ''
+
+runs:
+  using: "composite" # Indica que es una combinación de pasos
+  steps:
+    - name: Dar permisos al script
+      shell: bash
+      # 'github.action_path' es la ruta donde vive tu action, no el repo del usuario
+      run: chmod +x ${{ github.action_path }}/script.sh
+
+    - id: script
+      name: Deploy version
+      shell: bash
+      run: ${{ github.action_path }}/script.sh
