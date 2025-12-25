@@ -34,11 +34,10 @@ runs:
     - id: script
       name: Deploy version
       shell: bash
-      run: ${{ github.action_path }}/script.sh
-      env:
-        # Se crean variables de entorno que el script puede leer
-        EXTERNAL_TOKEN: ${{ inputs.external_token }}
-        YAML_PATH: ${{ inputs.yaml_path }}
-        VERSION_PATH: ${{ inputs.version_path }}
-        VERSION: ${{ inputs.version }}
-        REPO_NAME: ${{ inputs.gke_deploy_repo_name }}
+      run: |
+        ${{ github.action_path }}/script.sh \
+          "${{ inputs.external_token }}" \
+          "${{ inputs.yaml_path }}" \
+          "${{ inputs.version_path }}" \
+          "${{ inputs.version }}" \
+          "${{ inputs.gke_deploy_repo_name }}"
