@@ -28,7 +28,7 @@ git config user.email "github-actions[bot]@users.noreply.github.com"
 echo "Actualizando versión a $INPUT_VERSION en $YAML_PATH"
 
 # Comando yq para buscar el parámetro y actualizar el valor
-yq -i "${VERSION_PATH} = '${VERSION}'" $YAML_PATH
+yq -i '${VERSION_PATH} = "${VERSION}"' $YAML_PATH
 
 # 5. Commit y Push
 if [[ -n $(git status -s) ]]; then
