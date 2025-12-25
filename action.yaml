@@ -18,8 +18,8 @@ inputs:
     description: 'version'
     required: true
     default: ''
-  repository:
-    description: 'repository'
+  gke_deploy_repo_name:
+    description: 'gke_deploy_repo_name'
     required: true
     default: ''
 
