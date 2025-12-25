@@ -2,6 +2,10 @@ name: 'Argo Gke Deploy'
 description: 'Update version in a ApplicationSet in argo'
 
 inputs:
+  external_token:
+    description: 'External token'
+    required: true
+    default: 'nopath'
   yaml_path:
     description: 'Path to file to patch'
     required: true
@@ -12,6 +16,10 @@ inputs:
     default: ''
   version:
     description: 'version'
+    required: true
+    default: ''
+  repository:
+    description: 'repository'
     required: true
     default: ''
 

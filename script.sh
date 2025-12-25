@@ -1,8 +1,41 @@
 #!/bin/bash
 set -e
 
-ç=$1
-VERSION_PATH=$2
-VERSION=$3
+EXTERNAL_TOKEN=$1
+YAML_PATH=$2
+VERSION_PATH=$3
+VERSION=$4
+REPOSITORY=$5
 
-yq -i '.spec.template.spec.sources[0].helm.parameters[1].value = "v0.0.1.5"' archivo.yaml
+# 1. Configuración de variables
+# Usamos el token para construir la URL de autenticación
+REPO_URL="https://x-access-token:${EXTERNAL_TOKEN}@github.com/${REPOSITORY}.git"
+TEMP_DIR="repo_externo"
+
+echo "Iniciando clonación de $REPOSITORY..."
+
+# 2. Clonar el repositorio externo en una carpeta temporal
+git clone "$REPO_URL" "$TEMP_DIR"
+cd "$TEMP_DIR"
+
+# 3. Configurar la identidad de Git (necesario para el commit)
+git config user.name "github-actions[bot]"
+git config user.email "github-actions[bot]@users.noreply.github.com"
+
+# 4. Modificar el valor en el archivo YAML
+# Aquí ajusta la ruta del archivo según tu estructura de carpetas en el repo de infra
+
+echo "Actualizando versión a $INPUT_VERSION en $YAML_PATH"
+
+# Comando yq para buscar el parámetro y actualizar el valor
+yq -i "${VERSION_PATH} = '${VERSION}'" $YAML_PATH
+
+# 5. Commit y Push
+if [[ -n $(git status -s) ]]; then
+  git add "$YAML_PATH"
+  git commit -m "chore: update appVersion to $VERSION"
+  git push origin main
+  echo "Cambios subidos exitosamente."
+else
+  echo "No hay cambios detectados, saltando commit."
+fi
