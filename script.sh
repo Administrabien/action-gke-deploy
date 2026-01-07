@@ -33,9 +33,9 @@ yq -i "${VERSION_PATH} = \"${VERSION}\"" $YAML_PATH
 # 5. Commit y Push
 if [[ -n $(git status -s) ]]; then
   git add "$YAML_PATH"
-  git commit -m "chore: update appVersion to $VERSION"
+  git commit -m "chore: update appVersion to $VERSION in $YAML_PATH"
   git push origin main
-  echo "Cambios subidos exitosamente."
+  echo "Cambios cargados exitosamente."
 else
   echo "No hay cambios detectados, saltando commit."
 fi
