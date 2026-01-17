@@ -26,7 +26,7 @@ git config user.email "github-actions[bot]@users.noreply.github.com"
 # Aquí ajusta la ruta del archivo según tu estructura de carpetas en el repo de infra
 
 echo "Actualizando versión a $VERSION en $YAML_PATH"
-
+ls -la $YAML_PATH
 # Comando yq para buscar el parámetro y actualizar el valor
 yq -i "${VERSION_PATH} = \"${VERSION}\"" $YAML_PATH
 
