@@ -25,10 +25,12 @@ git config user.email "github-actions[bot]@users.noreply.github.com"
 # 4. Modificar el valor en el archivo YAML
 # Aquí ajusta la ruta del archivo según tu estructura de carpetas en el repo de infra
 
-echo "Actualizando versión a $INPUT_VERSION en $YAML_PATH"
+echo "Actualizando versión a $VERSION en $YAML_PATH"
 
 # Comando yq para buscar el parámetro y actualizar el valor
 yq -i "${VERSION_PATH} = \"${VERSION}\"" $YAML_PATH
+
+echo "Entrando al If"
 
 # 5. Commit y Push
 if [[ -n $(git status -s) ]]; then
