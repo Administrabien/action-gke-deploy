@@ -6,7 +6,7 @@ YAML_PATH=$2
 VERSION_PATH=$3
 VERSION=$4
 REPOSITORY=$5
-APP_NAME=$4       # NUEVO PARÁMETRO (Opcional)
+APP_NAME=$6       # NUEVO PARÁMETRO (Opcional)
 
 # 1. Configuración de variables
 # Usamos el token para construir la URL de autenticación
