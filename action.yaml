@@ -22,7 +22,10 @@ inputs:
     description: 'gke_deploy_repo_name'
     required: true
     default: ''
-
+  app_name:
+    description: 'the app name, a tag with this name will be created'
+    required: false
+    default: ''
 runs:
   using: "composite" # Indica que es una combinación de pasos
   steps:
@@ -40,4 +43,5 @@ runs:
           "${{ inputs.yaml_path }}" \
           "${{ inputs.version_path }}" \
           "${{ inputs.version }}" \
-          "${{ inputs.gke_deploy_repo_name }}"
+          "${{ inputs.gke_deploy_repo_name }}" \
+          "${{ inputs.app_name }}"
