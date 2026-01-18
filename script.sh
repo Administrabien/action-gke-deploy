@@ -37,7 +37,7 @@ echo "Entrando al If"
 # 5. Commit y Push
 if [[ -n $(git status -s) ]]; then
   git add "$YAML_PATH"
-  git commit -m "chore: update appVersion to $VERSION in $YAML_PATH"
+  git commit -m "$APP_NAME $VERSION"
   git push origin main
   echo "Cambios cargados exitosamente."
 
